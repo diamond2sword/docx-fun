@@ -19,13 +19,6 @@ proot_cmd()
 }
 
 {
-	# docx maker
-	pkg install python-lxml
-	pip install python-docx
-}
-
-	
-{
 	pkg install proot-distro
 	pd install $distro 
 	proot_cmd <(cat << "EOF"
@@ -33,4 +26,10 @@ proot_cmd()
 		apt install libreoffice-writer-nogui libreoffice-java-common
 EOF
 	)
+}
+
+{
+	# docx maker
+	pkg install python-lxml
+	pip install python-docx
 }
