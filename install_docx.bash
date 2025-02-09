@@ -1,22 +1,28 @@
 {
-	#pythondocx
-	# pkg install tur-repo #for pandss?
-	# 	
-	# pkg install python-numpy
-	# pkg install python-pandas
-	# pip install pillow
-	{
-		#python docx
-		# apt install clang
-		# apt install libxml2
-		# apt install libxslt
-		# pip install cython
-		pkg install python-lxml
-		# export CFLAGS="-Wno-incompatible-function-pointer-types -Wno-implicit-function-declaration"	pip install lxml
-		pip install python-docx
-	}
-	# #pythondocx misc
-	# pip install roman
-	# pip install titlecase
+	# docx maker
+	pkg install python-lxml
+	pip install python-docx
+}
+	
+
+{
+	pkg install proot-distro
+	pd install debian
 }
 
+rootfs_init=$(cat << "EOF"
+		apt update
+		apt install libreoffice-writer-nogui libreoffice-java-common
+EOF
+)
+
+proot_cmd()
+{
+	pd login debian --env cmd="$@" -- bash -c '$cmd'
+}
+
+{
+	# inside debian
+	# docx to pdf
+	proot_cmd "$rootfs_init"
+}
