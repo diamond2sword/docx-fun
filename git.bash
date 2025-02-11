@@ -24,9 +24,18 @@ declare_strings () {
 	SSH_TRUE_DIR="$ROOT_PATH/$SSH_DIR_NAME"
 	SSH_SYSTEM="ed25519"
 	COMMIT_NAME="update project"
-	SSH_KEY_PASSPHRASE="$(cat "$HOME/ssh-key-passphrase.txt")"
+	SSH_KEY_PASSPHRASE_FILE="$HOME/ssh-key-passphrase.txt"
+	SSH_KEY_PASSPHRASE="$(get_ssh_key_passphrase)"
 	REPO_URL="https://github.com/$GH_NAME/$REPO_NAME"
 	SSH_REPO_URL="git@github.com:$GH_NAME/$REPO_NAME"
+}
+
+get_ssh_key_passphrase()
+{
+	if [ -f "$SSH_KEY_PASSPHRASE_FILE" ]; then
+		cat "$SSH_KEY_PASSPHRASE_FILE"
+		return
+	fi
 }
 
 exec_git_command () {
